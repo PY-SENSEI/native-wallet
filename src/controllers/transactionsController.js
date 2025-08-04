@@ -37,7 +37,7 @@ export async function createTransaction(req, res) {
          }    
 }
 
-export async function deleteTranscation(req, res) {
+export async function deleteTransaction(req, res) {
     
         try {
           const {id} = req.params;
@@ -71,11 +71,11 @@ export async function getSummaryByUserId(req, res) {
            `
  
            const incomeResult = await sql`
-            SELECT COALESCe(SUM(amount), 0) as income FROM transactions
+            SELECT COALESCE(SUM(amount), 0) as income FROM transactions
             WHERE user_id = ${userId} AND amount > 0
             `
            const expensesResult = await sql`
-            SELECT COALESCe(SUM(amount), 0) as expenses FROM transactions
+            SELECT COALESCE(SUM(amount), 0) as expenses FROM transactions
             WHERE user_id = ${userId} AND amount < 0
             `
  
